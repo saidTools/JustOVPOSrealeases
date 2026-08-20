@@ -1,9 +1,13 @@
 {
-  "version": "1.0.1",
-  "published": false,
-  "mandatory": false,
-  "downloadUrl": "https://github.com/saidTools/JustOVPOSrealeases/releases/download/v1.0.1/JustOV-POS-1.0.1.zip",
-  "sha256": "18226dd877c5042d1446064967cd9c8a5bcc90bdeea3cfecd01056311d44e320",
-  "releaseNotes": { "en": "Update available", "fr": "", "ar": "" },
-  "publishedAt": "2026-08-20T13:36:14.478Z"
+    "version":  "1.0.1",
+    "published":  true,
+    "mandatory":  false,
+    "downloadUrl":  "https://github.com/saidTools/JustOVPOSrealeases/releases/download/v1.0.1/JustOV-POS-1.0.1.zip",
+    "sha256":  "18226dd877c5042d1446064967cd9c8a5bcc90bdeea3cfecd01056311d44e320",
+    "releaseNotes":  {
+                         "en":  "Update available",
+                         "fr":  "",
+                         "ar":  ""
+                     },
+    "publishedAt":  "2026-08-20T13:36:14.478Z"
 }
