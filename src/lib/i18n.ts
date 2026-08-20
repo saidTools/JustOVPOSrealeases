@@ -821,6 +821,9 @@ export const translations = {
     updateAvailableStatus: 'Update available',
     whatsappSupport: 'For inquiries, contact us on WhatsApp',
     whatsappTooltip: 'Contact us via WhatsApp',
+    supportContactsTitle: 'Support Contacts',
+    contactPhone: 'Phone',
+    contactWhatsapp: 'WhatsApp',
   },
   ar: {
     appName: 'نقطة البيع',
@@ -1620,6 +1623,9 @@ export const translations = {
     updateAvailableStatus: 'تحديث متوفر',
     whatsappSupport: 'للاستفسار تواصل معنا عبر واتساب',
     whatsappTooltip: 'للاستفسار عبر واتساب',
+    supportContactsTitle: 'جهات التواصل للدعم',
+    contactPhone: 'الهاتف',
+    contactWhatsapp: 'واتساب',
   },
   fr: {
     // App
@@ -2441,6 +2447,9 @@ export const translations = {
     updateAvailableStatus: 'Mise à jour disponible',
     whatsappSupport: 'Pour toute question, contactez-nous sur WhatsApp',
     whatsappTooltip: 'Contactez-nous sur WhatsApp',
+    supportContactsTitle: 'Contacts support',
+    contactPhone: 'Téléphone',
+    contactWhatsapp: 'WhatsApp',
   },
 } as const;
 

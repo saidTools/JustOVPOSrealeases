@@ -1,6 +1,11 @@
+import { useEffect, useState } from 'react';
+import { Phone, X } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 
-const WHATSAPP_URL = 'https://wa.me/213541230819';
+const CONTACTS = [
+  { name: 'Hakim', phone: '0796965952', whatsapp: '0655551844' },
+  { name: 'Said', phone: '0541230819', whatsapp: '0541230819' },
+];
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -12,35 +17,79 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export default function WhatsAppSupport() {
   const { t } = useApp();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   return (
-    <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={t('whatsappTooltip')}
-      className="no-print group fixed bottom-5 right-5 z-30 inline-flex select-none items-center gap-2.5 rounded-full py-2 pr-5 pl-2 text-sm font-medium transition-all duration-200 hover:scale-[1.03] hover:brightness-[1.02] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-      style={{
-        backgroundColor: 'var(--card)',
-        border: '1px solid var(--border)',
-        color: 'var(--text)',
-        boxShadow: '0 2px 10px -2px rgba(0, 0, 0, 0.14), 0 6px 24px -6px rgba(0, 0, 0, 0.10)',
-        WebkitBackdropFilter: 'blur(14px)',
-        backdropFilter: 'blur(14px)',
-        transitionProperty: 'background-color, border-color, color, transform, box-shadow',
-      }}
-    >
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-soft">
-        <WhatsAppIcon className="h-5 w-5" />
-      </span>
-      <span className="hidden sm:inline max-w-[min(44vw,22rem)] truncate">{t('whatsappSupport')}</span>
+    <div className="no-print fixed bottom-5 right-5 z-30">
+      {open && (
+        <>
+          <div className="fixed inset-0 z-20" onClick={() => setOpen(false)} aria-hidden="true" />
+          <div
+            role="dialog"
+            aria-label={t('supportContactsTitle')}
+            className="absolute bottom-full right-0 mb-3 w-[19rem] overflow-hidden rounded-2xl text-sm"
+            style={{
+              backgroundColor: 'var(--card)',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+              boxShadow: '0 10px 34px -8px rgba(0, 0, 0, 0.28), 0 2px 10px -2px rgba(0, 0, 0, 0.12)',
+              WebkitBackdropFilter: 'blur(16px)',
+              backdropFilter: 'blur(16px)',
+            }}
+          >
+            <div className="flex items-center justify-between border-b px-4 py-3" style={{ borderColor: 'var(--border)' }}>
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white">
+                  <WhatsAppIcon className="h-4 w-4" />
+                </span>
+                <span className="font-semibold">{t('supportContactsTitle')}</span>
+              </div>
+              <button onClick={() => setOpen(false)} className="btn-ghost rounded-lg p-1.5" aria-label={t('close')} title={t('close')}>
+                <X size={16} />
+              </button>
+            </div>
 
-      <span
-        className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium opacity-0 transition-opacity duration-150 group-hover:opacity-100"
-        style={{ backgroundColor: 'var(--text)', color: 'var(--bg)', boxShadow: '0 4px 14px -4px rgba(0, 0, 0, 0.25)' }}
+            <div className="space-y-2.5 p-3">
+              {CONTACTS.map((c) => (
+                <div key={c.name} className="rounded-xl border p-3" style={{ borderColor: 'var(--border)' }}>
+                  <p className="mb-2 font-semibold">{c.name}</p>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2.5">
+                      <Phone size={14} className="shrink-0" style={{ color: 'var(--text-secondary)' }} />
+                      <span style={{ color: 'var(--text-secondary)' }}>{t('contactPhone')}:</span>
+                      <span dir="ltr" className="tabular-nums font-medium">{c.phone}</span>
+                    </div>
+                    <div className="flex items-center gap-2.5">
+                      <WhatsAppIcon className="h-3.5 w-3.5 shrink-0 text-[#25D366]" />
+                      <span style={{ color: 'var(--text-secondary)' }}>{t('contactWhatsapp')}:</span>
+                      <span dir="ltr" className="tabular-nums font-medium">{c.whatsapp}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
+      <button
+        onClick={() => setOpen(!open)}
+        aria-label={t('whatsappTooltip')}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        className="relative z-30 flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366] text-white shadow-soft transition-transform duration-200 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
       >
-        {t('whatsappTooltip')}
-      </span>
-    </a>
+        <WhatsAppIcon className="h-6 w-6" />
+      </button>
+    </div>
   );
 }
