@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useState, type ReactNode } from 're
 import {
   LayoutDashboard, ShoppingCart, Package, Boxes, Truck, Users, ShoppingBag,
   CreditCard, BookOpen, Wallet, Barcode, BarChart3, Settings, Receipt,
-  UserCog, ScrollText, DatabaseBackup, Moon, Sun, LogOut, Menu,
+  UserCog, ScrollText, DatabaseBackup, Moon, Sun, LogOut, Menu, ZoomIn, ZoomOut,
   Store, ChevronLeft, ShieldCheck, FolderKanban, RotateCcw, History, Coins, UserRound, Banknote,
 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
@@ -189,11 +189,14 @@ export default function Layout({ route, routeParam, navigate, onLogout }: Layout
           <div className="flex items-center gap-2">
             <CashStatusChip />
             <button onClick={() => setLang(lang === 'en' ? 'ar' : lang === 'ar' ? 'fr' : 'en')} className="btn-ghost px-3 py-2 rounded-lg text-sm font-medium">
-              {lang === 'en' ? 'العربية' : lang === 'ar' ? 'Français' : 'English'}
+              {lang === 'en' ? 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©' : lang === 'ar' ? 'FranÃ§ais' : 'English'}
             </button>
             <NotificationCenter navigate={navigate} />
             <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="btn-ghost p-2 rounded-lg">
               {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
+            <button onClick={() => setZoom(prev => Math.min(2, Math.max(0.5, prev + 0.25)))} className="btn-ghost p-2 rounded-lg">
+              {zoom >= 1.5 ? <ZoomOut size={18} /> : <ZoomIn size={18} />}
             </button>
           </div>
         </header>
